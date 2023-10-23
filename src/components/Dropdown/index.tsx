@@ -2,8 +2,8 @@ import { useState } from "react";
 
 interface DropdownProps {
   values: string[];
-  onSelect: (val: string) => void;
-  selected?: string
+  onSelect: (val: string | null) => void;
+  selected?: string | null;
 }
 
 export default function Dropdown(props: DropdownProps) {
@@ -18,9 +18,7 @@ export default function Dropdown(props: DropdownProps) {
         type="button"
         onClick={() => setOpen(!open)}
       >
-        <p className="w-5/6">
-        Selected: {selected}
-        </p>
+        <p className="w-5/6">Selected: {selected || "none"}</p>
         <svg
           className="w-2.5 h-2.5 ml-2.5"
           aria-hidden="true"
@@ -46,8 +44,9 @@ export default function Dropdown(props: DropdownProps) {
             className="py-2 text-sm text-gray-700 dark:text-gray-200"
             aria-labelledby="dropdownDefaultButton"
           >
-            {values.map((val) => (
+            {values.map((val, index) => (
               <li
+                key={`option-${index}`}
                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                 onClick={() => {
                   setOpen(false);
@@ -57,6 +56,15 @@ export default function Dropdown(props: DropdownProps) {
                 {val}
               </li>
             ))}
+            <li
+              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+              onClick={() => {
+                setOpen(false);
+                onSelect(null);
+              }}
+            >
+              Without options
+            </li>
           </ul>
         </div>
       )}

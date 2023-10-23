@@ -11,14 +11,14 @@ import Error from "./components/Error";
 function App() {
   const [width, setWidth] = useState("200");
   const [height, setHeight] = useState("200");
-  const [options, setOptions] = useState("y");
+  const [options, setOptions] = useState<string | null>("y");
   const dispatch = useDispatch();
 
   const image = useSelector((state: State) => state.image);
   const loading = useSelector((state: State) => state.loading);
   const error = useSelector((state: State) => state.error);
 
-  const handleSubmit = (width: string, height: string, options: string) => {
+  const handleSubmit = (width: string, height: string, options: string|null) => {
     setWidth(width);
     setHeight(height);
     setOptions(options);

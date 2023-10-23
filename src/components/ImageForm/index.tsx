@@ -6,13 +6,13 @@ import Dropdown from "../Dropdown";
 import Error from "../Error";
 
 interface ImageFormProps {
-  onSubmit: (width: string, height: string, options: string) => void;
+  onSubmit: (width: string, height: string, options: string | null) => void;
 }
 
 export default function ImageForm(props: ImageFormProps) {
   const { onSubmit } = props;
   const formRef = useRef<HTMLFormElement | null>(null);
-  const [selected, setSelected] = useState("y");
+  const [selected, setSelected] = useState<string | null>("y");
   const [error, setError] = useState(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -43,7 +43,11 @@ export default function ImageForm(props: ImageFormProps) {
       {error && (
         <Error message="Add a width please" onHide={() => setError(false)} />
       )}
-      <Input type="number" name="height" placeholder="type the desired height" />
+      <Input
+        type="number"
+        name="height"
+        placeholder="type the desired height"
+      />
       <Dropdown
         values={["y", "g", "yg"]}
         onSelect={setSelected}
