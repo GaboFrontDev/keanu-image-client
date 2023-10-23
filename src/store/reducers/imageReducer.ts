@@ -7,7 +7,7 @@ import {
 } from "../actions";
 import { State } from ".";
 
-export const initialState: State = { image: "", loading: false };
+export const initialState: State = { image: "", loading: false, error: false };
 
 export function reducer(
   state = initialState,
@@ -19,9 +19,9 @@ export function reducer(
     case GET_IMAGE_END:
       return { ...state, loading: false };
     case GET_IMAGE_SUCCESS:
-      return { ...state, image: action.image };
+      return { ...state, image: action.image, error: false };
     case GET_IMAGE_FAILURE:
-      return state
+      return {...state, error: true}
     default:
       return state;
   }
