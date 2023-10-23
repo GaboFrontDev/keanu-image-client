@@ -34,19 +34,24 @@ function App() {
     );
   }, [dispatch, width, height, options]);
 
+  if (error) {
+    return (
+      <div className="w-screen h-screen flex items-center justify-center">
+        <Error message="A server side error happened" />
+      </div>
+    );
+  }
+
   return (
     <div className="w-screen h-screen flex items-center justify-center">
-      <>
-        {error && <Error message="A server side error happened" />}
-        <div className="flex items-center justify-center w-1/3">
-          <ImageForm onSubmit={handleSubmit} />
+      <div className="flex items-center justify-center w-1/3">
+        <ImageForm onSubmit={handleSubmit} />
+      </div>
+      <Card>
+        <div className="flex items-center justify-center w-2/3">
+          {loading ? <Loading /> : <ImageRender imageSrc={image} />}
         </div>
-        <Card>
-          <div className="flex items-center justify-center w-2/3">
-            {loading ? <Loading /> : <ImageRender imageSrc={image} />}
-          </div>
-        </Card>
-      </>
+      </Card>
     </div>
   );
 }
