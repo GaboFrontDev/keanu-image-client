@@ -1,8 +1,7 @@
-interface ImageRenderProps {
-  imageSrc?: string
-}
+import { useSelector } from "react-redux";
+import { State } from "../../store";
 
-export default function ImageRender(props: ImageRenderProps) {
-  const {imageSrc} = props;
-  return <img src={imageSrc} alt="keanu-img" />;
+export default function ImageRender() {
+  const image = useSelector((state: State) => state.image);
+  return <img src={image} alt="keanu-img" />;
 }

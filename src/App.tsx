@@ -16,7 +16,6 @@ function App() {
   const [options, setOptions] = useState<string | null>("y");
   const dispatch = useDispatch();
 
-  const image = useSelector((state: State) => state.image);
   const loading = useSelector((state: State) => state.loading);
   const error = useSelector((state: State) => state.error);
 
@@ -50,17 +49,17 @@ function App() {
 
   return (
     <div className={`${FLEX_CONTAINER_CLASSES} w-screen h-screen`}>
-      <div className={`${FLEX_CONTAINER_CLASSES} md:w-1/3`}>
+      <div className={`${FLEX_CONTAINER_CLASSES} my-2 md:my-0 md:w-1/3`}>
         <Card>
           <ImageForm onSubmit={handleSubmit} />
         </Card>
       </div>
-      <div className={`${FLEX_CONTAINER_CLASSES} md:w-2/3`}>
+      <div className={`${FLEX_CONTAINER_CLASSES} my-2 md:my-0 md:w-2/3`}>
         {loading ? (
           <Loading />
         ) : (
           <Card>
-            <ImageRender imageSrc={image} />
+            <ImageRender />
           </Card>
         )}
       </div>
