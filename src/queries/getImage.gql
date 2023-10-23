@@ -1,0 +1,5 @@
+query getImage {
+  image(width: $width, height: $height, options: $options) {
+    url
+  }
+}
