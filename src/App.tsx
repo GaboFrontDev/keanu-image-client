@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Loading from "./components/Loading";
 import Card from "./components/Card";
-import Dropdown from "./components/Dropdown";
 
 function App() {
   const [width, setWidth] = useState("200");
