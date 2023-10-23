@@ -38,7 +38,7 @@ export default function ImageForm(props: ImageFormProps) {
         type="number"
         name="width"
         required
-        placeholder="type the desired width"
+        placeholder="insert width"
       />
       {error && (
         <Error message="Add a width please" onHide={() => setError(false)} />
@@ -46,7 +46,7 @@ export default function ImageForm(props: ImageFormProps) {
       <Input
         type="number"
         name="height"
-        placeholder="type the desired height"
+        placeholder="insert height"
       />
       <Dropdown
         values={["y", "g", "yg"]}
