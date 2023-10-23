@@ -12,8 +12,9 @@ import * as apollo from "../../apollo";
 type AnyAction = { type: string; [key: string]: any };
 
 function* getImage({ payload: { width, height, options } }: AnyAction) {
+  const putImageAction = put<GetImageActions>
   try {
-    yield put<GetImageActions>({ type: GET_IMAGE_START });
+    yield putImageAction({ type: GET_IMAGE_START });
 
     const result: {
       data: {
@@ -23,14 +24,14 @@ function* getImage({ payload: { width, height, options } }: AnyAction) {
       };
     } = yield call(apollo.getImage, width, height, options);
 
-    yield put<GetImageActions>({
+    yield putImageAction({
       type: GET_IMAGE_SUCCESS,
       image: result?.data.image.url,
     });
-    yield put<GetImageActions>({ type: GET_IMAGE_END });
+    yield putImageAction({ type: GET_IMAGE_END });
   } catch (err) {
-    yield put<GetImageActions>({ type: GET_IMAGE_FAILURE });
-    yield put<GetImageActions>({ type: GET_IMAGE_END });
+    yield putImageAction({ type: GET_IMAGE_FAILURE });
+    yield putImageAction({ type: GET_IMAGE_END });
   }
 }
 
