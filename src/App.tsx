@@ -47,11 +47,7 @@ function App() {
       <div className="flex items-center justify-center w-1/3">
         <ImageForm onSubmit={handleSubmit} />
       </div>
-      <Card>
-        <div className="flex items-center justify-center w-2/3">
-          {loading ? <Loading /> : <ImageRender imageSrc={image} />}
-        </div>
-      </Card>
+      <Card>{loading ? <Loading /> : <ImageRender imageSrc={image} />}</Card>
     </div>
   );
 }
