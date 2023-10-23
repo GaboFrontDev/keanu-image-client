@@ -8,6 +8,8 @@ import Loading from "./components/Loading";
 import Card from "./components/Card";
 import Error from "./components/Error";
 
+const FLEX_CONTAINER_CLASSES = "flex flex-col-reverse md:flex-row items-center justify-center"
+
 function App() {
   const [width, setWidth] = useState("200");
   const [height, setHeight] = useState("200");
@@ -18,7 +20,11 @@ function App() {
   const loading = useSelector((state: State) => state.loading);
   const error = useSelector((state: State) => state.error);
 
-  const handleSubmit = (width: string, height: string, options: string|null) => {
+  const handleSubmit = (
+    width: string,
+    height: string,
+    options: string | null
+  ) => {
     setWidth(width);
     setHeight(height);
     setOptions(options);
@@ -36,18 +42,28 @@ function App() {
 
   if (error) {
     return (
-      <div className="w-screen h-screen flex items-center justify-center">
+      <div className={`${FLEX_CONTAINER_CLASSES} w-screen h-screen`}>
         <Error message="A server side error happened" />
       </div>
     );
   }
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center">
-      <div className="flex items-center justify-center w-1/3">
-        <ImageForm onSubmit={handleSubmit} />
+    <div className={`${FLEX_CONTAINER_CLASSES} w-screen h-screen`}>
+      <div className={`${FLEX_CONTAINER_CLASSES} md:w-1/3`}>
+        <Card>
+          <ImageForm onSubmit={handleSubmit} />
+        </Card>
       </div>
-      <Card>{loading ? <Loading /> : <ImageRender imageSrc={image} />}</Card>
+      <div className={`${FLEX_CONTAINER_CLASSES} md:w-2/3`}>
+        {loading ? (
+          <Loading />
+        ) : (
+          <Card>
+            <ImageRender imageSrc={image} />
+          </Card>
+        )}
+      </div>
     </div>
   );
 }
